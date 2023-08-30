@@ -1,5 +1,7 @@
 import { PropsWithChildren } from 'react';
 import Taro, { useDidShow, useLaunch } from '@tarojs/taro';
+import * as user from './utils/user';
+import { set as setGlobalData } from './global_data';
 import './app.less';
 
 function App({ children }: PropsWithChildren<any>) {
@@ -41,9 +43,16 @@ function App({ children }: PropsWithChildren<any>) {
     });
   }
 
-  // useDidShow(){
-
-  // }
+  useDidShow(() => {
+    user
+      .checkLogin()
+      .then(() => {
+        setGlobalData('hasLogin', true);
+      })
+      .catch(() => {
+        setGlobalData('hasLogin', false);
+      });
+  });
 
   // children 是将要会渲染的页面
   return children;

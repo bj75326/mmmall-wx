@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import Taro from '@tarojs/taro';
 import withMiddleware from './middleware';
+import { getShopNav } from '../services/shop';
 
 export interface Data {
   banner: Banner[];
@@ -101,7 +102,9 @@ export interface TopicList {
 
 export interface NavRecord {
   title: string;
-  // image:
+  image: string;
+  selectedImage: string;
+  ref_type: number;
 }
 
 export interface HomeStates {
@@ -113,14 +116,38 @@ export interface HomeStates {
   };
 }
 
-// export interface HomeActions {
+export interface HomeActions {
+  init: () => Promise<void>;
+}
 
-// }
+const useHomeStore = create(
+  withMiddleware<HomeStates & HomeActions>(
+    (set) => ({
+      data: {
+        banner: [],
+        brandList: [],
+        channel: [],
+        couponList: [],
+        floorGoodsList: [],
+        grouponList: [],
+        hotGoodsList: [],
+        newGoodsList: [],
+        topicList: [],
+      },
+      shop: {
+        nav: [],
+        currentNav: {},
+        currentNavIndex: 0,
+      },
+      init: async () => {
+        const nav = await getShopNav();
+        set((state) => {
+          state.shop.nav = nav;
+        });
+      },
+    }),
+    'home',
+  ),
+);
 
-// const useHomeRecord = create(
-//   withMiddleware<HomeStates & HomeActions>((set) => ({
-
-//   }), 'home'),
-// );
-
-// export default useHomeRecord;
+export default useHomeStore;

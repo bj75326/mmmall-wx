@@ -1,16 +1,22 @@
 import Taro from '@tarojs/taro';
 import { showErrorToast } from '../utils/util';
 
+export interface MmmallResponse<T> {
+  errno: number;
+  data: T;
+  errmsg: string;
+}
+
 /**
  * 封装微信的request
  */
-const request = <T>(
+const request = <T, U>(
   url: string,
-  data: T,
+  data: U,
   method: Taro.request.Option['method'] = 'GET',
-) => {
+): Promise<T> => {
   return new Promise((resolve, reject) => {
-    Taro.request({
+    Taro.request<MmmallResponse<T>, U>({
       url,
       data,
       method,
@@ -49,12 +55,12 @@ const request = <T>(
   });
 };
 
-request.get = <T>(url: string, data: T) => {
-  return request(url, data, 'GET');
+request.get = <T, U>(url: string, data: U) => {
+  return request<T, U>(url, data, 'GET');
 };
 
-request.post = <T>(url: string, data: T) => {
-  return request(url, data, 'POST');
+request.post = <T, U>(url: string, data: U) => {
+  return request<T, U>(url, data, 'POST');
 };
 
 export default request;

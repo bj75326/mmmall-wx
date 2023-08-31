@@ -1,6 +1,6 @@
 // 以下是业务服务器API地址
 // 局域网测试使用
-var WxApiRoot = 'http://localhost:4523/m1/3221122-0-default/wx/';
+var WxApiRoot = 'https://mock.apifox.cn/m1/3221122-0-default/wx/';
 // 云平台部署时使用
 // var WxApiRoot = 'https://shop.andmedia.cn/wx/';
 
@@ -96,4 +96,6 @@ export default {
 
   UserIndex: WxApiRoot + 'user/index', //个人页面用户相关信息
   IssueList: WxApiRoot + 'issue/list', //帮助信息
+
+  NavList: WxApiRoot + 'nav/list', // 导航
 };

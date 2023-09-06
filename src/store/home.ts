@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import Taro from '@tarojs/taro';
+import { getIndex } from '@/services/index';
 import withMiddleware from './middleware';
-import { getShopNav } from '../services/shop';
+// import { getShopNav } from '../services/shop';
 
 export interface Data {
   banner: Banner[];
@@ -9,47 +9,51 @@ export interface Data {
   channel: Channel[];
   couponList: CouponList[];
   floorGoodsList: FloorGoodsList[];
-  grouponList: string[];
+  grouponList: GrouponList[];
   hotGoodsList: HotGoodsList[];
   newGoodsList: NewGoodsList[];
   topicList: TopicList[];
 }
 
 export interface Banner {
-  addTime: string;
-  content: string;
-  deleted: boolean;
-  enabled: boolean;
+  addTime?: string;
+  content?: string;
+  deleted?: boolean;
+  enabled?: boolean;
+  endTime?: string;
   id: number;
   link: string;
   name: string;
-  position: number;
-  updateTime: string;
+  position?: number;
+  startTime?: string;
+  updateTime?: string;
   url: string;
 }
 
 export interface BrandList {
   desc: string;
-  floorPrice: number | number;
+  floorPrice?: number;
   id: number;
   name: string;
   picUrl: string;
 }
 
 export interface Channel {
-  iconUrl: string;
+  iconUrl?: string;
   id: number;
   name: string;
 }
 
 export interface CouponList {
-  days: number;
-  desc: string;
-  discount: number;
+  days?: number;
+  desc?: string;
+  discount?: number;
+  endTime?: string;
   id: number;
-  min: number;
+  min?: number;
   name: string;
-  tag: string;
+  startTime?: string;
+  tag?: string;
 }
 
 export interface FloorGoodsList {
@@ -59,65 +63,79 @@ export interface FloorGoodsList {
 }
 
 export interface GoodsList {
-  brief: string;
-  counterPrice: number;
+  brief?: string;
+  counterPrice?: number;
   id: number;
-  isHot: boolean;
-  isNew: boolean;
+  isHot?: boolean;
+  isNew?: boolean;
   name: string;
-  picUrl: string;
-  retailPrice: number | number;
+  picUrl?: string;
+  retailPrice?: number;
+}
+
+export interface GrouponList {
+  brief?: string;
+  counterPrice?: number;
+  expireTime?: string;
+  grouponDiscount?: number;
+  grouponMember?: number;
+  grouponPrice?: number;
+  id: number;
+  name: string;
+  picUrl?: string;
+  retailPrice?: number;
 }
 
 export interface HotGoodsList {
-  brief: string;
-  counterPrice: number;
+  brief?: string;
+  counterPrice?: number;
   id: number;
-  isHot: boolean;
-  isNew: boolean;
+  isHot?: boolean;
+  isNew?: boolean;
   name: string;
-  picUrl: string;
-  retailPrice: number;
+  picUrl?: string;
+  retailPrice?: number;
 }
 
 export interface NewGoodsList {
-  brief: string;
-  counterPrice: number;
+  brief?: string;
+  counterPrice?: number;
   id: number;
-  isHot: boolean;
-  isNew: boolean;
+  isHot?: boolean;
+  isNew?: boolean;
   name: string;
-  picUrl: string;
-  retailPrice: number;
+  picUrl?: string;
+  retailPrice?: number;
 }
 
 export interface TopicList {
   id: number;
-  picUrl: string;
-  price: number | number;
-  readCount: string;
-  subtitle: string;
+  picUrl?: string;
+  price?: number;
+  readCount?: string;
+  subtitle?: string;
   title: string;
 }
 
-export interface NavRecord {
-  title: string;
-  image: string;
-  selectedImage: string;
-  ref_type: number;
-}
+// export interface NavRecord {
+//   title: string;
+//   image: string;
+//   selectedImage: string;
+//   ref_type: number;
+// }
 
 export interface HomeStates {
   data: Data;
-  shop: {
-    nav: NavRecord[];
-    currentNav: {};
-    currentNavIndex: 0;
-  };
+  // shop: {
+  //   nav: NavRecord[];
+  //   currentNav: {};
+  //   currentNavIndex: 0;
+  // };
 }
 
 export interface HomeActions {
-  init: () => Promise<void>;
+  // getShopNav: () => Promise<void>;
+  getIndex: () => Promise<void>;
 }
 
 const useHomeStore = create(
@@ -134,15 +152,21 @@ const useHomeStore = create(
         newGoodsList: [],
         topicList: [],
       },
-      shop: {
-        nav: [],
-        currentNav: {},
-        currentNavIndex: 0,
-      },
-      init: async () => {
-        const nav = await getShopNav();
+      // shop: {
+      //   nav: [],
+      //   currentNav: {},
+      //   currentNavIndex: 0,
+      // },
+      // getShopNav: async () => {
+      //   const nav = await getShopNav();
+      //   set((state) => {
+      //     state.shop.nav = nav;
+      //   });
+      // },
+      getIndex: async () => {
+        const res = await getIndex<Data, null>(null);
         set((state) => {
-          state.shop.nav = nav;
+          state.data = res;
         });
       },
     }),

@@ -59,6 +59,7 @@
     "immer": "^10.0.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "taro-ui": "^3.1.1",
     "zustand": "^4.4.1"
   },
   "devDependencies": {

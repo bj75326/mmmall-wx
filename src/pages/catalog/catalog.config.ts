@@ -1,5 +1,5 @@
 export default {
-  navigationBarTitleText: '个人中心',
+  navigationBarTitleText: '分类',
   enablePullDownRefresh: true,
   usingComponents: {},
 };

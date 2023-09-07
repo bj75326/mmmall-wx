@@ -1,7 +1,9 @@
 import { PropsWithChildren } from 'react';
 import Taro, { useDidShow, useLaunch } from '@tarojs/taro';
-import * as user from './utils/user';
-import { set as setGlobalData } from './global_data';
+import * as user from '@/utils/user';
+import { set as setGlobalData } from '@/global_data';
+
+import 'taro-ui/dist/style/index.scss';
 import './app.less';
 
 function App({ children }: PropsWithChildren<any>) {

@@ -1,8 +1,8 @@
 export default defineAppConfig({
   pages: [
     'pages/index/index',
-    // 'pages/catalog/catalog',
-    // 'pages/cart/cart',
+    'pages/catalog/catalog',
+    'pages/cart/cart',
     'pages/ucenter/index/index',
   ],
   window: {

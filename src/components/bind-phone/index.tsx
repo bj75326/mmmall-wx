@@ -3,6 +3,7 @@ import Taro from '@tarojs/taro';
 import { Button, BaseEventOrig, ButtonProps } from '@tarojs/components';
 import * as app from '@/utils/app';
 import { bindPhone } from '@/services/auth';
+import './index.less';
 
 interface BindPhoneBtnProps {
   children: React.ReactNode;

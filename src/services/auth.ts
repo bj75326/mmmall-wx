@@ -4,7 +4,7 @@ import Api from '../config/api';
 /**
  *  微信登录
  */
-export async function loginByWeXin<T, U>(payload: U) {
+export async function loginByWX<T, U>(payload: U) {
   return request.post<T, U>(Api.AuthLoginByWeixin, payload);
 }
 

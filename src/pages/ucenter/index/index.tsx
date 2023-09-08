@@ -149,10 +149,6 @@ const Index: React.FC = () => {
     app.navigateToCheck('/pages/ucenter/order/order');
   }, []);
 
-  // const handleFnClick = useCallback((e: BaseEventOrig) => {
-  //   console.log('e--> ', e.currentTarget);
-  // }, []);
-
   const handleFnClick = (item: FnItem) => {
     if (item.url && item.type !== 'about') {
       app.navigateToCheck(item.url);
@@ -222,7 +218,7 @@ const Index: React.FC = () => {
     <Block>
       <View className="bar-container container">
         <View className="layout-my">
-          <View className="header">
+          <View className="header center">
             <Image
               className="avatar"
               src={userInfo.avatarUrl || images.avatar}

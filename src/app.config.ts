@@ -4,6 +4,8 @@ export default defineAppConfig({
     'pages/catalog/catalog',
     'pages/cart/cart',
     'pages/ucenter/index/index',
+
+    'pages/auth/login/login',
   ],
   window: {
     backgroundTextStyle: 'light',

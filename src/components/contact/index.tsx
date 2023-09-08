@@ -1,12 +1,8 @@
-import React from 'react';
+import { PropsWithChildren } from 'react';
 import { Button } from '@tarojs/components';
 import './index.less';
 
-interface ContactProps {
-  children: React.ReactNode;
-}
-
-const Contact: React.FC<ContactProps> = (props) => (
+const Contact = (props: PropsWithChildren) => (
   <Button className="user_column_item_phone" openType="contact">
     {props.children}
   </Button>
